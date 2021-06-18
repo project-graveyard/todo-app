@@ -26,7 +26,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 -->
 
 Note: After cloning the repository, add firebase.js into the src/ folder\
-Write the following code:\
+Write the following code:
 ```js
 import firebase from 'firebase';
 

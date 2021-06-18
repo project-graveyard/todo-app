@@ -19,7 +19,7 @@ function App() {
     //runs when App.js loads
     db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
       // console.log(snapshot.docs.map(doc => doc.data()))
-      setTodos(snapshot.docs.map(doc => doc.data().todoItem))
+      setTodos(snapshot.docs.map(doc => ({id: doc.id, todo: doc.data().todoItem})))
     })
   }, []);
 

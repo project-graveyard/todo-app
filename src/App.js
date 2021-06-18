@@ -1,26 +1,38 @@
 import './Styles/App.css';
 import './Styles/Bootstrap/bootstrap.min.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@material-ui/core'
 import { PlaylistAddCheck, Add } from '@material-ui/icons';
 import Todo from './Components/Todo'
+import { db } from './firebase';
+import firebase from 'firebase'
+
+
 
 function App() {
 
-  const [todos, setTodos] = useState(['Take the dog for a walk', 'Take out the rubbish'])
+  const [todos, setTodos] = useState([])
   const [input, setInput] = useState('')
-  // console.log(input)
+
+  //Getting data from database
+  useEffect(() => {
+    //runs when App.js loads
+    db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
+      // console.log(snapshot.docs.map(doc => doc.data()))
+      setTodos(snapshot.docs.map(doc => doc.data().todoItem))
+    })
+  }, []);
 
   const addTodo = (event) => {
     // called when the button is clicked
-    event.preventDefault() 
-    // console.log("It's working")
-    setTodos([...todos, input])
-    setInput('')  //clears the input field after submitting
-  }
+    event.preventDefault()
 
-  let color = {
-    color: "cornflowerblue",
+    db.collection('todos').add({
+      todoItem: input,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    // setTodos([...todos, input])
+    setInput('')  //clears the input field after submitting
   }
 
   return (

@@ -4,7 +4,6 @@
   * Real-time database
 * Hosted online:
   * Firebase: [click here](https://mytodo-ep.web.app)
-  * Netlify: [click here](https://mytodo-ep.netlify.app)
 * Has full CRUD(Create, Read, Update, Delete) functionality
 * Material UI for the design
 * React js as frontend
